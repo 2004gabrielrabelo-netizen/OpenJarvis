@@ -1,0 +1,29 @@
+
+name: Build OpenJarvis Desktop
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "desktop/**"
+      - "frontend/**"
+      - ".github/workflows/build-desktop.yml"
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Show project structure
+        shell: pwsh
+        run: |
+          Get-ChildItem -Force
+          Get-ChildItem desktop -Recurse -Depth 2
+
+      - name: Build desktop
+        shell: pwsh
+        run: |
+          Write-Host "Project structure checked."
